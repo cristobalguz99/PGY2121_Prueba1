@@ -12,7 +12,7 @@ public class Usuario {
     private int Rut;
     private String Dv;
     private Date FechaNacimiento;
-    private int Telefono;
+    private String Telefono;
     private String Email;
     private String NombreUser;
     private String Contrasena;
@@ -26,13 +26,13 @@ public class Usuario {
         this.Rut = 0;
         this.Dv = "";
         this.FechaNacimiento = new Date();
-        this.Telefono = 0;
+        this.Telefono = "";
         this.Email = "";
         this.NombreUser = "";
         this.Contrasena = "";
     }    
 
-    public Usuario(int ID, String PrimerNombre, String SegundoNombre, String ApellidoPaterno, String ApellidoMaterno, int Rut, String Dv, Date FechaNacimiento, int Telefono, String Email, String NombreUser, String Contrasena) {
+    public Usuario(int ID, String PrimerNombre, String SegundoNombre, String ApellidoPaterno, String ApellidoMaterno, int Rut, String Dv, Date FechaNacimiento, String Telefono, String Email, String NombreUser, String Contrasena) {
         this.ID = ID;
         this.PrimerNombre = PrimerNombre;
         this.SegundoNombre = SegundoNombre;
@@ -108,15 +108,20 @@ public class Usuario {
     }
 
     public void setFechaNacimiento(Date FechaNacimiento) {
+        int edad = Period.between(FechaNacimiento, LocalDate.now());
         this.FechaNacimiento = FechaNacimiento;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return Telefono;
     }
 
-    public void setTelefono(int Telefono) {
-        this.Telefono = Telefono;
+    public void setTelefono(String Telefono) {
+        if(Telefono.starsWith("hola")){
+            this.Telefono = Telefono; 
+        }        
+        
+
     }
 
     public String getEmail() {
@@ -124,7 +129,10 @@ public class Usuario {
     }
 
     public void setEmail(String Email) {
-        this.Email = Email;
+        if(Email.contains("@") && Email.contains(".")){
+           this.Email = Email; 
+           //Como hacer para verificar que existan caracteres despues del Punto
+        }
     }
 
     public String getNombreUser() {
@@ -132,7 +140,9 @@ public class Usuario {
     }
 
     public void setNombreUser(String NombreUser) {
-        this.NombreUser = NombreUser;
+        if(NombreUser.length() >= 4){
+            this.NombreUser=NombreUser;
+        }
     }
 
     public String getContrasena() {
@@ -140,7 +150,20 @@ public class Usuario {
     }
 
     public void setContrasena(String Contrasena) {
-        this.Contrasena = Contrasena;
+        int mayuscula=0;
+        int numero=0;
+        for (int i=0; i<Contrasena.length(); i++){
+            char c = Contrasena.charAt(i);
+            if(c>=97 && c<=122){
+                mayuscula++;
+            }
+            if(Character.isDigit(c)){
+                numero++;
+            }
+            if(mayuscula>0 && numero>0 && Contrasena.length()>6){
+                this.Contrasena = Contrasena;
+            }
+        } 
     }
     
 
