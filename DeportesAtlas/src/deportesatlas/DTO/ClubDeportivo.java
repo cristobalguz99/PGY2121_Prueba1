@@ -1,6 +1,5 @@
 package deportesatlas.DTO;
-import java.util.Date;
-//CORREGir DATE
+import deportesatlas.Principal;
 
 public class ClubDeportivo {
     //Rol único otorgado por la asociación de Handball, Nombre del Club, 
@@ -41,8 +40,15 @@ public class ClubDeportivo {
         return Rol;
     }
 
-    public void setRol(String Rol) {
-        this.Rol = Rol;
+    //El código de los equipos está conformado por: Primeras 2 letras del nombre
+    //+ Inicial del deporte al que pertenece (por ahora Handball, 
+    //en un futuro podría ser agregado otro) + correlativo (empezando del 10).
+    
+    
+    
+    public void setRol(String NombreClub, int Correlativo) {
+        this.Rol = (NombreClub.substring(0,2))+"H"+(Correlativo); //Se podria crear un nuevo atributo llamado tipo de deporte y seleccionar la primera letra.
+        
     }
 
     public String getNombreClub() {
