@@ -1,5 +1,4 @@
 package deportesatlas.DTO;
-import deportesatlas.Principal;
 
 public class ClubDeportivo {
     //Rol único otorgado por la asociación de Handball, Nombre del Club, 
@@ -40,23 +39,17 @@ public class ClubDeportivo {
         return Rol;
     }
 
-    //El código de los equipos está conformado por: Primeras 2 letras del nombre
-    //+ Inicial del deporte al que pertenece (por ahora Handball, 
-    //en un futuro podría ser agregado otro) + correlativo (empezando del 10).
+    public void setNombreClub(String NombreClub) {
+        this.NombreClub = NombreClub;
+    }    
     
-    
-    
-    public void setRol(int Correlativo) {
-        this.Rol = (this.NombreClub.substring(0,2))+"H"+(Correlativo); //Se podria crear un nuevo atributo llamado tipo de deporte y seleccionar la primera letra.
-        
-    }
-
     public String getNombreClub() {
         return NombreClub;
     }
-
-    public void setNombreClub(String NombreClub) {
-        this.NombreClub = NombreClub;
+    
+    public void setRol(int Correlativo) {
+        this.Rol = (NombreClub.substring(0,2))+"H"+(Correlativo); //Se podria crear un nuevo atributo llamado tipo de deporte y seleccionar la primera letra.
+        
     }
 
     public String getNombreFundador() {
@@ -108,20 +101,16 @@ public class ClubDeportivo {
     }
     
     //METODO PARA CONCATENAR COLORES DE CLUB
-
-    //Metodo actualizar nombre club
-    
-    public void setActualizarNombre(String nombreactual, String nombrenuevo){
-        if (nombreactual.equals(this.NombreClub)){
-            this.NombreClub=nombrenuevo;
-
-        }
+    public String ConcatenaColor(ClubDeportivo c2){
+        String union=ColoresClub+", "+c2.getColoresClub();
+        return union;
+    }
+   
+    //METODO ACTUALIZAR NOMBRE
+    public void ActualizarNombre(String nombrenuevo){
+        this.NombreClub=nombrenuevo;
         
     }
-            
-        
-    
-        
-    
-    
 }
+
+

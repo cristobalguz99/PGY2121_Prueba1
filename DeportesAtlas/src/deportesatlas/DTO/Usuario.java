@@ -154,10 +154,9 @@ public class Usuario {
         int mayuscula=0;
         int numero=0;
         for (int i=0; i<Contrasena.length(); i++){
-            char c = Contrasena.charAt(i);
-            if(c>=97 && c<=122){
+            if(Character.isUpperCase(Contrasena.charAt(i))){
                 mayuscula++;
-            }else if(Character.isDigit(c)){
+            }else if(Character.isDigit(Contrasena.charAt(i))){
                 numero++;
             }
         }
@@ -184,7 +183,7 @@ public class Usuario {
     }    
        
     //METODO OBTENER EDAD----------------------------
-    public String getEdad(){
+    public String Edad(){
         LocalDate FechaActual = LocalDate.now();
         DateTimeFormatter FormatoFecha = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate FechaNacFormato = LocalDate.parse(FechaNacimiento, FormatoFecha);
@@ -193,7 +192,7 @@ public class Usuario {
     }
     
     //METODO LOGIN
-    public String getLogin(String NombreUser, String Contrasena){
+    public String Login(String NombreUser, String Contrasena){
         if (NombreUser.equals(this.NombreUser) && Contrasena.equals(this.Contrasena)){
             return "Logeado Correctamente";
         }else{
@@ -202,26 +201,24 @@ public class Usuario {
     }
     
     //METODO REINICIAR CONTRASENA
-    //LO SIENTO X REPETIR CODIGO PERO PARA INGRESAR EL SET CONTRASENA DECIA QUE NO DEBIA SER ESTATICO Y NOSE COMO CAMBIARLO :(
-    public String getReinciarPass(String NombreUser, String NuevaContrasena){
+    public String ReinciarPass(String NombreUser, String NuevaContrasena){
         if(NombreUser.equals(this.NombreUser)){
             int mayuscula=0;
             int numero=0;
             for (int i=0; i<NuevaContrasena.length(); i++){
-                char c = NuevaContrasena.charAt(i);
-                if(c>=97 && c<=122){
+                if(Character.isUpperCase(Contrasena.charAt(i))){
                     mayuscula++;
-                }else if(Character.isDigit(c)){
+            }else if(Character.isDigit(Contrasena.charAt(i))){
                     numero++;
                 }
-            }
+            } 
             if(mayuscula>0 && numero>0 && NuevaContrasena.length()>6){
                     this.Contrasena = NuevaContrasena;
                     return "Contrasena Actualizada";
             }else{
                 System.out.println("Contrasena no cumple requisitos");
-            }
-        }
+            } 
+        }    
         return "Nombre Usuario Incorrecto";
     }
 }

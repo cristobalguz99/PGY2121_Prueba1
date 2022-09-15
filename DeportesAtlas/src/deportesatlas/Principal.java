@@ -3,85 +3,80 @@ package deportesatlas;
 import deportesatlas.DTO.ClubDeportivo;
 import deportesatlas.DTO.Suscripcion;
 import deportesatlas.DTO.Usuario;
+import java.util.Date;
 
 public class Principal {
 
     public static void main(String[] args) {
-        int correlativoID=1000;         //avanza de 1
-        int correlativoRol=10;   //avanza de 10
+        int correlativoID=1000;
+        int correlativoRol=10;
         
-//ID, nombre completo, rut, digito verificador, fecha de nacimiento, teléfono, email, nombre de usuario y contraseña.
-
         Usuario User01 = new Usuario();
         
         User01.setID(correlativoID+10);
         User01.setPrimerNombre("Cristobal");
+        User01.setSegundoNombre("Alexis");
         User01.setApellidoPaterno("Guzman");
+        User01.setApellidoMaterno("Lorca");
         User01.setRut(19768866, '1');
         User01.setFechaNacimiento("1999/02/23");
         User01.setEmail("crguzman@duoc.cl");
         User01.setTelefono("56996966344");        
         User01.setNombreUser("GuzmanCR");
-        User01.setContrasena("holaaa2");
+        User01.setContrasena("Holaaa2");
+
+        //VALIDAR RUT
+        User01.validarRut(19768866, '1');
         
-        Usuario User02 = new Usuario(); //Creamos nuevo usuario para ver si el correlativo ID es distinto y suma 10.
-        User02.setID(correlativoID+10);
-        System.out.println("ID Usuario 2 es: "+User02.getID());
-        System.out.println("ID Usuario 1 es: "+User01.getID());
-        
-        
-        //OBTENER EDAD
-        System.out.println("Usuario 1 "+User01.getEdad());
+        //OBTENER EDAD USUARIO 
+        System.out.println("Usuario 1 "+User01.Edad());
         
         //LOGIN
-        System.out.println(User01.getLogin("GuzmanCR", "Holaaa2"));
-        System.out.println(User01.getLogin("guzmanCR", "Holaaa2")); //Logeamos con usuario incorrecto para probar
-
+        System.out.println(User01.Login("GuzmanCR", "Holaaa2"));
+        System.out.println(User01.Login("guzmanCR", "Holaaa2")); //Logeamos con usuario incorrecto para probar
         
         //REINICAR CONTRASEÑA
-        //System.out.println(User01.getReinciarPass("GuzmanCR", "Holaaa3"));
-        //System.out.println(User01.getReinciarPass("GuzmanCR", "haaa3")); //Introducimos contrasena que no cumple requisitos a modo de prueba
-
-        System.out.println(User01.getContrasena());
+        System.out.println(User01.ReinciarPass("GuzmanCR", "Holaaa3"));
+        System.out.println(User01.ReinciarPass("GuzmanCR", "haaa3")); //Introducimos contrasena que no cumple requisitos a modo de prueba
+        System.out.println(User01.getContrasena());//Contraseña actualizada
         
-
-        
-     //Rol único otorgado por la asociación de Handball, Nombre del Club, 
-    //nombre del fundador, año de fundación, País de origen, Lema, colores y valor de su suscripción.
-    
+        //----------------------------------------------------------------------
         ClubDeportivo Club01 = new ClubDeportivo();
         
         Club01.setNombreClub("ChesterUnido");
         Club01.setRol(correlativoRol++);
         Club01.setColoresClub("Blanco, Rojo");
-        Club01.setActualizarNombre("ChesterUnido", "Rocky");
+        Club01.setNombreFundador("Benito Juarez");
+        Club01.setAnioFundacion(1969);
+        Club01.setPaisOrigen("Chilezuela");
+        Club01.setLema("Dar hasta que duela");
+        Club01.setPrecioSuscripcion(13990);
+        
+        //ROL
+        System.out.println(Club01.getRol());
+        
+        //ACTUALIZAR NOMBRE
+        Club01.ActualizarNombre("Rocky");
         System.out.println(Club01.getNombreClub());
+        
+        //ROL ACTUALIZADO
         Club01.setRol(correlativoRol++);
+        System.out.println(Club01.getRol());
         
-        
-        
-        
-        
-        System.out.println("El Rol del club 01 es: "+Club01.getRol());
-        
-        //Creamos otro club para comprobar que el correlativo del Rol sume 1
+        //CONCATENAR COLORES EQUIPOS
         ClubDeportivo Club02 = new ClubDeportivo();
-
-        Club02.setColoresClub("Negro, Blanco");
-        Club02.setNombreClub("Universidad de Chester");
-        Club02.setRol(correlativoRol++);
-        System.out.println("El rol del club 2 es: "+Club02.getRol());
-    
-        System.out.println(Club01.getColoresClub()+Club02.getColoresClub());    
-    
-    
+        Club02.setColoresClub("Blanco, azul y rojo");
+        System.out.println(Club01.ConcatenaColor(Club02));
+        
+        //----------------------------------------------------------------------
+        
         Suscripcion Suscripcion01 = new Suscripcion();
         
         Suscripcion01.setNumeroSuscripcion(100);
         Suscripcion01.setUsuario(User01);
-        Suscripcion01.setClubDeportivo(Club02);
+        Suscripcion01.setClubDeportivo(Club01);
+        Suscripcion01.setInicioSuscripcion(new Date());
+        Suscripcion01.setPagoTotal(0);
+
     }
-        
-    
-    
 }
