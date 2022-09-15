@@ -108,7 +108,6 @@ public class Usuario {
     }
 
     public void setFechaNacimiento(Date FechaNacimiento) {
-        int edad = Period.between(FechaNacimiento, LocalDate.now());
         this.FechaNacimiento = FechaNacimiento;
     }
 
@@ -117,11 +116,9 @@ public class Usuario {
     }
 
     public void setTelefono(String Telefono) {
-        if(Telefono.starsWith("hola")){
+        if(Telefono.length()>=8 && Telefono.startsWith("56")){
             this.Telefono = Telefono; 
         }        
-        
-
     }
 
     public String getEmail() {
@@ -149,7 +146,7 @@ public class Usuario {
         return Contrasena;
     }
 
-    public void setContrasena(String Contrasena) {
+    public void setContrasena(String Contrasena) {//Rexito
         int mayuscula=0;
         int numero=0;
         for (int i=0; i<Contrasena.length(); i++){
