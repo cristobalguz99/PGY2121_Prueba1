@@ -46,8 +46,8 @@ public class ClubDeportivo {
     
     
     
-    public void setRol(String NombreClub, int Correlativo) {
-        this.Rol = (NombreClub.substring(0,2))+"H"+(Correlativo); //Se podria crear un nuevo atributo llamado tipo de deporte y seleccionar la primera letra.
+    public void setRol(int Correlativo) {
+        this.Rol = (this.NombreClub.substring(0,2))+"H"+(Correlativo); //Se podria crear un nuevo atributo llamado tipo de deporte y seleccionar la primera letra.
         
     }
 
@@ -107,7 +107,21 @@ public class ClubDeportivo {
         this.PrecioSuscripcion = PrecioSuscripcion;
     }
     
+    //METODO PARA CONCATENAR COLORES DE CLUB
+
+    //Metodo actualizar nombre club
     
+    public void setActualizarNombre(String nombreactual, String nombrenuevo){
+        if (nombreactual.equals(this.NombreClub)){
+            this.NombreClub=nombrenuevo;
+
+        }
+        
+    }
+            
+        
+    
+        
     
     
 }
