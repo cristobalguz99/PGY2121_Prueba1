@@ -67,7 +67,5 @@ public class Suscripcion {
     public void setPagoTotal(int PagoTotal) {
         this.PagoTotal = PagoTotal;
     }
-    
-    
-    
+            
 }

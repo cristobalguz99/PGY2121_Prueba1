@@ -50,17 +50,38 @@ public class Principal {
     //nombre del fundador, año de fundación, País de origen, Lema, colores y valor de su suscripción.
     
         ClubDeportivo Club01 = new ClubDeportivo();
+        
         Club01.setNombreClub("ChesterUnido");
-        Club01.setRol(Club01.getNombreClub(),correlativoRol++);
-        System.out.println(Club01.getRol());
+        Club01.setRol(correlativoRol++);
+        Club01.setColoresClub("Blanco, Rojo");
+        Club01.setActualizarNombre("ChesterUnido", "Rocky");
+        System.out.println(Club01.getNombreClub());
+        Club01.setRol(correlativoRol++);
+        
+        
+        
+        
+        
+        System.out.println("El Rol del club 01 es: "+Club01.getRol());
         
         //Creamos otro club para comprobar que el correlativo del Rol sume 1
         ClubDeportivo Club02 = new ClubDeportivo();
+
+        Club02.setColoresClub("Negro, Blanco");
         Club02.setNombreClub("Universidad de Chester");
-        Club02.setRol(Club02.getNombreClub(),correlativoRol++);
-        System.out.println(Club02.getRol());
+        Club02.setRol(correlativoRol++);
+        System.out.println("El rol del club 2 es: "+Club02.getRol());
     
+        System.out.println(Club01.getColoresClub()+Club02.getColoresClub());    
+    
+    
+        Suscripcion Suscripcion01 = new Suscripcion();
         
+        Suscripcion01.setNumeroSuscripcion(100);
+        Suscripcion01.setUsuario(User01);
+        Suscripcion01.setClubDeportivo(Club02);
     }
+        
+    
     
 }
