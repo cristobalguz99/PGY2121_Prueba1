@@ -2,17 +2,14 @@ package deportesatlas.DTO;
 import java.util.Date;
 
 public class Suscripcion {
-    //Usuario, fecha de inicio de la suscripción, valor de la suscripción***YA ESTA EN CLUB DEPORTIVOS, SE CREA DENUEVO???
-    // equipos al que se está suscrito 
-    //y abono total por concepto de pagos, además de un correlativo de la venta
-    
+
     private int NumeroSuscripcion;
     private Usuario Usuario;
     private Date InicioSuscripcion;
-    private ClubDeportivo ClubDeportivo;
+    private String ClubDeportivo;
     private int PagoTotal;
 
-    public Suscripcion(int NumeroSuscripcion, Usuario Usuario, Date InicioSuscripcion, ClubDeportivo ClubDeportivo, int PagoTotal) {
+    public Suscripcion(int NumeroSuscripcion, Usuario Usuario, Date InicioSuscripcion, String ClubDeportivo, int PagoTotal) {
         this.NumeroSuscripcion = NumeroSuscripcion;
         this.Usuario = Usuario;
         this.InicioSuscripcion = InicioSuscripcion;
@@ -24,7 +21,7 @@ public class Suscripcion {
         this.NumeroSuscripcion = 0;
         this.Usuario = new Usuario();
         this.InicioSuscripcion = new Date();
-        this.ClubDeportivo = new ClubDeportivo();
+        this.ClubDeportivo = "";
         this.PagoTotal = 0;
     }
 
@@ -33,7 +30,9 @@ public class Suscripcion {
     }
 
     public void setNumeroSuscripcion(int NumeroSuscripcion) {
-        this.NumeroSuscripcion = NumeroSuscripcion;
+        if(NumeroSuscripcion>0){
+            this.NumeroSuscripcion = NumeroSuscripcion;
+        }
     }
 
     public Usuario getUsuario() {
@@ -52,11 +51,11 @@ public class Suscripcion {
         this.InicioSuscripcion = InicioSuscripcion;
     }
 
-    public ClubDeportivo getClubDeportivo() {
+    public String getClubDeportivo() {
         return ClubDeportivo;
     }
 
-    public void setClubDeportivo(ClubDeportivo ClubDeportivo) {
+    public void setClubDeportivo(String ClubDeportivo) {
         this.ClubDeportivo = ClubDeportivo;
     }
 
@@ -65,7 +64,29 @@ public class Suscripcion {
     }
 
     public void setPagoTotal(int PagoTotal) {
-        this.PagoTotal = PagoTotal;
+        if(PagoTotal>0){
+            this.PagoTotal = PagoTotal;
+        }    
     }
-     
+
+    //METODO AGREGAR CLUB A SUSCRIPCION, ACTUALIZA EL PRECIO TOTAL Y AGREGA EL ROL DEL EQUIPO
+    public void agregarClubDeportivo(ClubDeportivo club){
+        if(this.ClubDeportivo == null){
+            this.ClubDeportivo = "";
+        }
+        if(!this.ClubDeportivo.equals("")){
+            this.ClubDeportivo += "; ";
+        }
+        this.ClubDeportivo += club.FormatoSuscripcion();
+        this.PagoTotal += club.getPrecioSuscripcion();
+    }    
+    
+    @Override
+    public String toString() {
+        return "Suscripcion \n Numero: " + NumeroSuscripcion + 
+                "\n Usuario: " + Usuario.FormatoSuscripcion() + 
+                "\n FechaInicio: " + InicioSuscripcion + 
+                "\n AbonoTotal: " + PagoTotal + 
+                "\n Equipos: " + ClubDeportivo; 
+    }      
 }

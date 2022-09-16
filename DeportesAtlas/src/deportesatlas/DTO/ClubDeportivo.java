@@ -109,8 +109,22 @@ public class ClubDeportivo {
     //METODO ACTUALIZAR NOMBRE
     public void ActualizarNombre(String nombrenuevo){
         this.NombreClub=nombrenuevo;
+    }
+    
+    //FORMATO SUSCRIPCION
+    public String FormatoSuscripcion() {
+        return Rol + " $" + PrecioSuscripcion;
         
     }
+    @Override
+    public String toString() {
+        return "ClubDeportivo \n Rol: "+Rol+
+                "\n Nombre club: " + NombreClub + 
+                "\n NombreFundador: " + NombreFundador + 
+                "\n Año de Fundacion: " + AnioFundacion + 
+                "\n Pais de Origen: " + PaisOrigen + 
+                "\n Lema: " + Lema + 
+                "\n Valor de la Suscripcion: $" + PrecioSuscripcion + 
+                "\n colores: " + ColoresClub;
+    }   
 }
-
-

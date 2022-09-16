@@ -1,11 +1,12 @@
 package deportesatlas.DTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.Period;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Usuario {
-    //ID, nombre completo, rut, digito verificador, fecha de nacimiento, teléfono, email, nombre de usuario y contraseña.
     
     private int ID;
     private String PrimerNombre;
@@ -109,7 +110,6 @@ public class Usuario {
         return FechaNacimiento;
     }
 
-    //LA FOX CON LAS FECHAS :(
     public void setFechaNacimiento(String FechaNacimiento) {
         this.FechaNacimiento = FechaNacimiento;
     
@@ -191,6 +191,17 @@ public class Usuario {
         return "La edad es: "+Edad.getYears()+" años "+Edad.getMonths()+" meses "+Edad.getDays()+" dias.";
     }
     
+    //METODO VALIDAR FECHA
+    public Date ValidarFecha(String fecha){
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            return formato.parse(fecha);
+        } catch (ParseException ex) {
+            System.out.println("Fecha no valida: " + fecha); 
+            return null;
+        }
+    }    
+    
     //METODO LOGIN
     public String Login(String NombreUser, String Contrasena){
         if (NombreUser.equals(this.NombreUser) && Contrasena.equals(this.Contrasena)){
@@ -221,4 +232,35 @@ public class Usuario {
         }    
         return "Nombre Usuario Incorrecto";
     }
+    
+    //METODO VALIDAR +18 Años
+    private Date validarFechaNacimiento(String fecha){
+        Date fechaNacimiento = ValidarFecha(fecha);
+        if(fechaNacimiento != null){
+            Date actual = new Date();
+            int anioNacimiento = fechaNacimiento.getYear();
+            int anioActual = actual.getYear();
+            if(anioActual - anioNacimiento > 17) {
+                return fechaNacimiento;
+            }
+        }
+        System.out.println("Usuario menor de edad"); 
+        return null;
+    }    
+    
+    @Override
+    public String toString() {
+        return "Usuario \nID: " + ID + "\nNombre Completo: " + PrimerNombre+" "+SegundoNombre+" "+ApellidoPaterno+" "+ApellidoMaterno+ 
+                "\n Rut: " + Rut + "-" + Dv + 
+                "\n Fecha de Nacimiento: " + FechaNacimiento +
+                "\n Telefono: " + Telefono + 
+                "\n Nombre de Usuario: " + NombreUser + 
+                "\n Email: " + Email + 
+                "\n Contraseña: " + Contrasena;
+    }    
+    
+    //FORMATO PARA IMPRIMIR LA SUSCRIPCION
+    String FormatoSuscripcion() {
+        return getNombreUser() + " " +getPrimerNombre()+" "+getApellidoPaterno();
+    }    
 }

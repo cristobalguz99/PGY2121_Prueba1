@@ -10,6 +10,7 @@ public class Principal {
     public static void main(String[] args) {
         int correlativoID=1000;
         int correlativoRol=10;
+        int correlativoVenta=100;
         
         Usuario User01 = new Usuario();
         
@@ -24,9 +25,17 @@ public class Principal {
         User01.setTelefono("56996966344");        
         User01.setNombreUser("GuzmanCR");
         User01.setContrasena("Holaaa2");
+        
+        System.out.println(User01);
 
         //VALIDAR RUT
         User01.validarRut(19768866, '1');
+        
+        //VALIDAR FECHA NACIMIENTO
+        User01.ValidarFecha(User01.getFechaNacimiento());
+        
+        //VALIDAR +18 AÑOS
+        System.out.println(User01.getFechaNacimiento());
         
         //OBTENER EDAD USUARIO 
         System.out.println("Usuario 1 "+User01.Edad());
@@ -52,31 +61,52 @@ public class Principal {
         Club01.setLema("Dar hasta que duela");
         Club01.setPrecioSuscripcion(13990);
         
+        ClubDeportivo Club02 = new ClubDeportivo();
+        Club02.setNombreClub("Universidad de Charly");
+        Club02.setPrecioSuscripcion(15890);
+        Club02.setColoresClub("Blanco, azul y rojo");  
+        Club02.setRol(correlativoRol++);
+
+        System.out.println(Club01);
+        
         //ROL
         System.out.println(Club01.getRol());
+        System.out.println("");
         
         //ACTUALIZAR NOMBRE
         Club01.ActualizarNombre("Rocky");
         System.out.println(Club01.getNombreClub());
-        
+         
         //ROL ACTUALIZADO
         Club01.setRol(correlativoRol++);
         System.out.println(Club01.getRol());
+        System.out.println(Club01);
         
         //CONCATENAR COLORES EQUIPOS
-        ClubDeportivo Club02 = new ClubDeportivo();
-        Club02.setColoresClub("Blanco, azul y rojo");
+
         System.out.println(Club01.ConcatenaColor(Club02));
         
         //----------------------------------------------------------------------
         
         Suscripcion Suscripcion01 = new Suscripcion();
         
-        Suscripcion01.setNumeroSuscripcion(100);
+        Suscripcion01.setNumeroSuscripcion(correlativoVenta+10);
         Suscripcion01.setUsuario(User01);
-        Suscripcion01.setClubDeportivo(Club01);
         Suscripcion01.setInicioSuscripcion(new Date());
-        Suscripcion01.setPagoTotal(0);
+        
+        correlativoVenta+= 10;
+        Suscripcion Suscripcion02 = new Suscripcion();
+        Suscripcion02.setUsuario(User01);
+        Suscripcion02.setInicioSuscripcion(new Date());
+        Suscripcion02.setNumeroSuscripcion(correlativoVenta+10);    
 
+        //AGREGAR CLUB A SUSCRIPCION
+        Suscripcion01.agregarClubDeportivo(Club02);
+        Suscripcion01.agregarClubDeportivo(Club01);
+        Suscripcion02.agregarClubDeportivo(Club02);
+        
+        //MOSTRAR SUSCRIPCION
+        System.out.println(Suscripcion01);
+        System.out.println(Suscripcion02);
     }
 }
